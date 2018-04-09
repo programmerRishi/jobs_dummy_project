@@ -1,11 +1,12 @@
 import axios from 'axios';
-import reverseGeo from 'latlng-to-zip';
+import reverseGeocode from 'latlng-to-zip';
 import queryString from 'qs';
 
 import {
   FETCH_JOBS_SUCCESS,
   FETCH_JOBS_FAILED,
-  FETCHING_JOBS
+  FETCHING_JOBS,
+  LIKE_JOB
 } from './types';
 
 const API_KEY = 'AIzaSyC1SoruU05DQn8Ck-lIIkmKacQQ3zWU-1Y';
@@ -28,7 +29,7 @@ export const fetchJobs = (region, navigate) => async dispatch => {
   try {
       console.log('fetching started');
       dispatch({ type: FETCHING_JOBS });
-      const zipCode = await reverseGeo(region, API_KEY);
+      const zipCode = await reverseGeocode(region, API_KEY);
       const url = buildJobsUrl(zipCode);
       const { data } = await axios.get(url);
       dispatch({ type: FETCH_JOBS_SUCCESS, payload: data });
@@ -37,4 +38,11 @@ export const fetchJobs = (region, navigate) => async dispatch => {
       dispatch({ type: FETCH_JOBS_FAILED });
       console.log(e);
     }
+};
+
+export const likeJob = (job) => {
+  return {
+    type: LIKE_JOB,
+    payload: job
+  };
 };

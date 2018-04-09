@@ -3,6 +3,7 @@ import { View, Text, Platform, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card } from 'react-native-elements';
+import * as actions from '../actions';
 import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
@@ -21,7 +22,7 @@ class DeckScreen extends Component {
     const { height } = Dimensions.get('window');
     return (
       <Card title={job.jobtitle} >
-        <View style={{ borderWidth: 2, height: (0.4 * height) }}>
+        <View style={{ height: (0.4 * height), marginBottom: 10 }}>
         <MapView
         scrollEnabled={false}
         style={{ flex: 1 }}
@@ -57,6 +58,7 @@ class DeckScreen extends Component {
           data={this.props.jobs}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight={job => this.props.likeJob(job)}
           keyProp='jobkey'
         />
       </View>
@@ -68,6 +70,7 @@ const styles = {
     container: {
       flex: 1,
       backgroundColor: '#fff',
+      marginTop: 10
     },
     detailWrapper: {
       flex: 1,
@@ -82,4 +85,4 @@ const mapStateToProps = ({ jobsReducer }) => {
   return { jobs };
 };
 
-export default connect(mapStateToProps, null)(DeckScreen);
+export default connect(mapStateToProps, actions)(DeckScreen);

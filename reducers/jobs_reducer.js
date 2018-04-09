@@ -7,8 +7,14 @@ import {
 const INITIAL_STATE = { jobs: [], loading: false };
 
 const pushData = (state, results) => {
+  let count = 0;
   for (let i = 0; i < results.length; i++) {
-    state.jobs.push(results[i]);
+    for (let j = 0; j < state.jobs.length; j++) {
+      // jobkey is the property of every job object having a specific key
+       if (results[i].jobkey === state.jobs[j].jobkey) count++;
+    }
+    if (count === 0) state.jobs.push(results[i]);
+    count = 0;
   }
 };
 
