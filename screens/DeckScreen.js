@@ -2,23 +2,32 @@ import React, { Component } from 'react';
 import { View, Text, Platform, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { Card } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import * as actions from '../actions';
 import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
+  static navigationOptions = () => (
+    {
+      tabBarLabel: 'Jobs',
+      tabBarIcon: ({ tintColor }) => {
+        return <Icon name='description' size={30} color={tintColor} />;
+      }
+    }
+  );
 
   componentWillReceiveProps(nextProps) {
    console.log(nextProps);
   }
 
-  renderCard(job) {
+  renderCard = (job) => {
     const initialRegion = {
       longitude: job.longitude,
       latitude: job.latitude,
       latitudeDelta: 0.045,
       longitudeDelta: 0.02
     };
+
     const { height } = Dimensions.get('window');
     return (
       <Card title={job.jobtitle} >
@@ -38,20 +47,28 @@ class DeckScreen extends Component {
           <Text>{job.company}</Text>
           <Text>{job.formattedRelativeTime}</Text>
         </View>
-        <Text>{job.snippet.replace('<b>', '').replace('<\/b>', '')}</Text>
+        <View style={{ height: 70 }}>
+          <Text>{job.snippet.replace(/[<b>]/g, '').replace(/[<\/b>]/g, '')}</Text>
+        </View>
       </Card>
     );
   }
 
-  renderNoMoreCards() {
+  renderNoMoreCards = () => {
       return (
         <Card title='No more Jobs'>
+          <Button
+            title='Back to Map'
+            large
+            icon={{ name: 'my-location' }}
+            backgroundColor='#00aced'
+            onPress={() => this.props.navigation.navigate('map')}
+          />
         </Card>
       );
   }
 
   render() {
-    console.log(this.nextProps);
     return (
       <View style={styles.container}>
         <Swipe

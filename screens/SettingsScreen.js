@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Platform } from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { clearlikedJobs } from '../actions';
 
 class SettingsScreen extends Component {
+  static navigationOptions = () => (
+    {
+      title: 'Settings',
+      headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1
+      },
+      headerStyle: {
+          marginTop: Platform.OS === 'android' ? 15 : 0
+      },
+      headerRight: <View />
+    }
+  );
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          I am SettingsScreen
-        </Text>
+        <Button
+        title='Clear all Liked Jobs'
+        large
+        backgroundColor='#CF000F'
+        containerViewStyleProp={{ borderRadius: 4 }}
+        icon={{ name: 'delete-forever' }}
+        onPress={this.props.clearlikedJobs}
+        />
       </View>
           );
         }
@@ -20,4 +42,4 @@ const styles = {
           justifyContent: 'center',
         },
       };
-export default SettingsScreen;
+export default connect(null, { clearlikedJobs })(SettingsScreen);

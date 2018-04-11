@@ -30,7 +30,13 @@ const MainScreen = TabNavigator(
     }
   },
   {
-    tabBarPosition: 'bottom'
+    tabBarPosition: 'bottom',
+    swipeEnabled: false,
+    tabBarOptions: {
+      showIcon: true,
+      showLabel: true,
+      labelStyle: { fontSize: 14 }
+    },
   }
 );
 

@@ -6,7 +6,8 @@ import {
   FETCH_JOBS_SUCCESS,
   FETCH_JOBS_FAILED,
   FETCHING_JOBS,
-  LIKE_JOB
+  LIKE_JOB,
+  CLEAR_LIKED_JOBS
 } from './types';
 
 const API_KEY = 'AIzaSyC1SoruU05DQn8Ck-lIIkmKacQQ3zWU-1Y';
@@ -44,5 +45,11 @@ export const likeJob = (job) => {
   return {
     type: LIKE_JOB,
     payload: job
+  };
+};
+
+export const clearlikedJobs = () => {
+  return {
+    type: CLEAR_LIKED_JOBS,
   };
 };
