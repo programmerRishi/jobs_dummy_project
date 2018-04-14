@@ -7,12 +7,12 @@ import {
    Dimensions,
     Linking
  } from 'react-native';
-import { Button, Card, Icon } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
-  static navigationOptions = ({ navigation }) => (
+  static navigationOptions = () => (
     {
         title: 'Review Jobs',
         headerTitleStyle: (
@@ -27,19 +27,8 @@ class ReviewScreen extends Component {
             marginTop: Platform.OS === 'android' ? 15 : 0
           }
         ),
-        headerRight: (
-          <Button
-          title='Settings'
-          onPress={() => navigation.navigate('settings')}
-          backgroundColor='rgba(0,0,0,0)'
-          color='rgba(0,122,255,1)'
-          />
-        ),
+        headerRight: <View />,
         headerLeft: <View />,
-        tabBarLabel: 'Review Jobs',
-        tabBarIcon: ({ tintColor }) => {
-          return <Icon name='favorite' size={30} color={tintColor} />;
-        }
     }
 );
 
@@ -117,7 +106,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ likedJobs }) => {
-  // console.log(likedJobs);
   return { likedJobs };
 };
 

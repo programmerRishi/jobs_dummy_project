@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
-import { Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { CustomModal } from '../components/common';
 import * as actions from '../actions';
 
 class MapScreen extends Component {
-  static navigationOptions = () => (
-    {
-      tabBarLabel: 'Map',
-      tabBarIcon: ({ tintColor }) => {
-        return <Icon name='my-location' size={30} color={tintColor} />;
-      }
-    }
-  );
+
   state = {
     showModal: false,
     region: {
@@ -84,7 +77,6 @@ const styles = {
 
 const mapStateToProps = ({ jobsReducer }) => {
   const { jobs, loading } = jobsReducer;
-    console.log(loading);
   return { jobs, loading };
 };
 

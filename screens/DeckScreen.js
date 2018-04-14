@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import { View, Text, Platform, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
@@ -7,18 +7,6 @@ import * as actions from '../actions';
 import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
-  static navigationOptions = () => (
-    {
-      tabBarLabel: 'Jobs',
-      tabBarIcon: ({ tintColor }) => {
-        return <Icon name='description' size={30} color={tintColor} />;
-      }
-    }
-  );
-
-  componentWillReceiveProps(nextProps) {
-   console.log(nextProps);
-  }
 
   renderCard = (job) => {
     const initialRegion = {
@@ -44,11 +32,11 @@ class DeckScreen extends Component {
         />
         </View>
         <View style={styles.detailWrapper}>
-          <Text>{job.company}</Text>
-          <Text>{job.formattedRelativeTime}</Text>
+            <Text>{job.company}</Text>
+            <Text>{job.formattedRelativeTime}</Text>
         </View>
         <View style={{ height: 70 }}>
-          <Text>{job.snippet.replace(/[<b>]/g, '').replace(/[<\/b>]/g, '')}</Text>
+            <Text>{job.snippet.replace(/[<b>]/g, '').replace(/[<\/b>]/g, '')}</Text>
         </View>
       </Card>
     );
@@ -79,9 +67,9 @@ class DeckScreen extends Component {
           keyProp='jobkey'
         />
       </View>
-          );
-        }
-      }
+    );
+  }
+}
 
 const styles = {
     container: {

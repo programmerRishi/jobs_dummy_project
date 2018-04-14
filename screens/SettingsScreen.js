@@ -15,21 +15,27 @@ class SettingsScreen extends Component {
       headerStyle: {
           marginTop: Platform.OS === 'android' ? 15 : 0
       },
-      headerRight: <View />
+      headerRight: <View />,
+      headerLeft: <View />
     }
   );
+
+  onButtonPress = () => {
+      this.props.clearlikedJobs();
+      this.props.navigation.navigate('reviewScreen');
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
-        title='Clear all Liked Jobs'
-        large
-        backgroundColor='#CF000F'
-        containerViewStyleProp={{ borderRadius: 4 }}
-        icon={{ name: 'delete-forever' }}
-        onPress={this.props.clearlikedJobs}
-        />
+          <Button
+          title='Clear all Liked Jobs'
+          large
+          backgroundColor='#CF000F'
+          containerViewStyleProp={{ borderRadius: 4 }}
+          icon={{ name: 'delete-forever' }}
+          onPress={this.onButtonPress}
+          />
       </View>
           );
         }

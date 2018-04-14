@@ -28,7 +28,6 @@ const buildJobsUrl = (zipCode) => {
 
 export const fetchJobs = (region, navigate) => async dispatch => {
   try {
-      console.log('fetching started');
       dispatch({ type: FETCHING_JOBS });
       const zipCode = await reverseGeocode(region, API_KEY);
       const url = buildJobsUrl(zipCode);
@@ -37,7 +36,6 @@ export const fetchJobs = (region, navigate) => async dispatch => {
       navigate();
   } catch (e) {
       dispatch({ type: FETCH_JOBS_FAILED });
-      console.log(e);
     }
 };
 
